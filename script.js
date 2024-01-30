@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      2024-01-29
 // @description  Automated booking for student centre seats
-// @author       You
+// @author       Yi Hein Chai
 // @match        https://library-calendars.ucl.ac.uk/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=tampermonkey.net
 // @grant        none
