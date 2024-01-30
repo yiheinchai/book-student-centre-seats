@@ -1,0 +1,20 @@
+{
+    "manifest_version": 2,
+    "name": "Student Centre Booking",
+    "version": "2024-01-29",
+    "description": "Automated booking for student centre seats",
+    "icons": {
+      "64": "icon.png"
+    },
+    "background": {
+      "scripts": ["background.js"],
+      "persistent": false
+    },
+    "permissions": [
+      "https://library-calendars.ucl.ac.uk/*",
+      "storage",
+      "tabs",
+      "alarms"
+    ]
+  }
+  
