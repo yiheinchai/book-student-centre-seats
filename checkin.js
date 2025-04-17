@@ -15,18 +15,26 @@
 
   const EMAIL_LINK = "https://outlook.office.com/mail/";
   const CHECKIN_LINK = "https://library-calendars.ucl.ac.uk/r/checkin";
-  const TIMES_TO_CHECKIN = ["11:00", "15:00"];
+  const TIMES_TO_CHECKIN = ["12:00", "15:30"];
 
   function getFormattedDate() {
-    return new Intl.DateTimeFormat("en-US", {
-      month: "long",
-      day: "numeric",
-    }).format(new Date());
-  }
+        const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+        const today = new Date();
+        const dayName = days[today.getDay()];
+        const day = today.getDate();
+        const monthName = months[today.getMonth()];
+        const year = today.getFullYear();
+
+        return `${dayName} ${day} ${monthName} ${year}`;
+    }
 
   async function getCheckInCode(time) {
+    console.log("Getting code for time: ", time, getFormattedDate())
     let checkInCode = false;
-    for (let i = 0; i < 30; i++) {
+    document.querySelector("#MailList .customScrollBar").scrollTo(0,0)
+    for (let i = 0; i < 100; i++) {
       try {
         Array.from(
           document
@@ -43,7 +51,8 @@
           .click();
         checkInCode = document
           .querySelector(".x_content")
-          .textContent.split(" ")[93];
+          .textContent.split(" ")[34];
+        console.log("the check in code is", checkInCode)
         return checkInCode;
       } catch (error) {
         document.querySelector("#MailList .customScrollBar").scrollBy(0, 100);
@@ -105,17 +114,19 @@
 
   async function start() {
     for (const time of TIMES_TO_CHECKIN) {
-      if (!checkIfTimeInTodayAlreadyCheckedIn(time) && isTimeToCheckIn(time)) {
-        if (window.location.href.includes(EMAIL_LINK)) {
-          await emailHandler(time);
-        }
-
+       console.log('Checking in at', time)
         if (window.location.href.includes(CHECKIN_LINK)) {
           await checkInHandler(time);
+        }
+      console.log(new Date(), time, "today already checked in?" ,checkIfTimeInTodayAlreadyCheckedIn(time), "is it time to checkin?" , isTimeToCheckIn(time))
+      if (!checkIfTimeInTodayAlreadyCheckedIn(time) && isTimeToCheckIn(time)) {
+        console.log('Getting email link at', time)
+        if (window.location.href.includes(EMAIL_LINK)) {
+          await emailHandler(time);
         }
       }
     }
   }
 
-  setInterval(start, 10000);
+  setInterval(start, 20000);
 })();
