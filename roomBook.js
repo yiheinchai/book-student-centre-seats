@@ -12,10 +12,10 @@
 (function() {
     "use strict";
 
-    const TIMES_TO_BOOK = ["18:00", "19:00"];
+    const TIMES_TO_BOOK = ["11:00", "12:00", "13:00"];
     const BOOKING_LINK =
-        "https://library-calendars.ucl.ac.uk/r/new/availability?lid=1140&zone=0&gid=5417&capacity=4";
-    const PREFERRED_SEAT = "Winner"
+        "https://library-calendars.ucl.ac.uk/r/new/availability?lid=872&zone=427&gid=5428&capacity=2";
+    const PREFERRED_SEAT = "2.17"
 
     function sleep(ms) {
         // Return a promise that resolves after the given delay
